@@ -1,0 +1,133 @@
+.gallery-root {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.thumb {
+  position: relative;
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(14, 30, 37, 0.08);
+  transform-origin: center;
+}
+
+.thumb img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 320ms cubic-bezier(.2,.9,.2,1), filter 220ms;
+}
+
+.thumb:hover img,
+.thumb:focus img {
+  transform: scale(1.06) rotate(.5deg);
+  filter: contrast(1.05) saturate(1.02);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.overlay .zoom {
+  pointer-events: auto;
+  margin: 12px;
+  background: linear-gradient(90deg,#00000066,#00000044);
+  color: #fff;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: linear-gradient(180deg, rgba(7,11,14,0.6), rgba(7,11,14,0.85));
+  z-index: 9999;
+  padding: 20px;
+}
+
+.lb-stage {
+  max-width: 92vw;
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lb-stage img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 30px 60px rgba(2,6,23,0.6);
+  transition: transform 200ms;
+}
+
+.lb-caption {
+  margin-top: 8px;
+  color: #dfe6ee;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.lb-close {
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  border: none;
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.lb-nav {
+  background: rgba(0,0,0,0.4);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lb-prev { margin-left: 10px; }
+.lb-next { margin-right: 10px; }
+
+@media (max-width: 640px) {
+  .thumb img { height: 140px; }
+  .lb-nav { padding: 8px 10px; font-size: 22px }
+  .lb-caption { font-size: 13px }
+}
+
+@media (max-width: 420px) {
+  .grid { gap: 8px }
+  .thumb img { height: 120px }
+  .overlay .zoom { margin: 8px; font-size: 12px }
+}
