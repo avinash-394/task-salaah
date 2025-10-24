@@ -2,14 +2,29 @@ import React, { useState, useEffect, useCallback } from 'react'
 import './Gallery.css'
 
 const IMAGES = [
-  { src: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=1400&q=80&auto=format&fit=crop', alt: 'Mountains' },
-  { src: 'https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1400&q=80&auto=format&fit=crop', alt: 'Forest' },
-  { src: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=1400&q=80&auto=format&fit=crop', alt: 'Desert' },
-  { src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1400&q=80&auto=format&fit=crop', alt: 'Beach' },
-  { src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1400&q=80&auto=format&fit=crop', alt: 'City' },
-  { src: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1400&q=80&auto=format&fit=crop', alt: 'Valley' },
-  { src: 'https://images.unsplash.com/photo-1470770903676-69b98201ea1c?w=1400&q=80&auto=format&fit=crop', alt: 'Stars' },
-  { src: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1400&q=80&auto=format&fit=crop', alt: 'Canyon' }
+  { src: 'https://drive.google.com/thumbnail?id=15kGz7uMWnDOJWla-dsWNvdFmQKHO1WCr&sz=w600', alt: 'Image 1' },
+  { src: 'https://drive.google.com/thumbnail?id=1L7iHhsiXemXW9R0DHgJMUJ1U2nRNavIl&sz=w600', alt: 'Image 2' },
+  { src: 'https://drive.google.com/thumbnail?id=1F3_RZBhpQnBAqgE9JjSGAS0NUWbldG76&sz=w600', alt: 'Image 3' },
+  { src: 'https://drive.google.com/thumbnail?id=1fCpMe8Oy7E-ACZ-50cXsJqBZMqZNsQRw&sz=w600', alt: 'Image 4' },
+  { src: 'https://drive.google.com/thumbnail?id=18WdU8dYIc4MEqIYlEbW7_f6ArqmAYTI9&sz=w600', alt: 'Image 5' },
+  { src: 'https://drive.google.com/thumbnail?id=1yp62e_Hgeefkp8rHowy3EVhy-84gcWkN&sz=w1000', alt: 'Image 6' },
+  { src: 'https://drive.google.com/thumbnail?id=1ecFO-W1Oumjv2Gc4Mn_3Ui9jbTkQqn9p&sz=w500', alt: 'Image 7' },
+  { src: 'https://drive.google.com/thumbnail?id=19BZpl8Ibvf5S6kOEaKUAaS7E6RUKEBwT&sz=w1000', alt: 'Image 8' },
+  { src: 'https://drive.google.com/thumbnail?id=1ph7d9n7MVUTVRLHNQ4SRiZRiw9ZxklvX&sz=w1000', alt: 'Image 9' },
+  { src: 'https://drive.google.com/thumbnail?id=1sfOiFKzqx_47nUzNVsBuok-xmhlSHMwq&sz=w1000', alt: 'Image 10' },
+  { src: 'https://drive.google.com/thumbnail?id=1lEkYrCZq6EPlddLlvavg5LEJaDr37uBt&sz=w1000', alt: 'Image 11' },
+  { src: 'https://drive.google.com/thumbnail?id=1Hh-ISJAu5Nj667OrCzvxS9GMwZMONHjZ&sz=w1000', alt: 'Image 12' },
+  { src: 'https://drive.google.com/thumbnail?id=1qli2Q6Fn7YuvYzFdGklFGIFy0cSkK_tO&sz=w1000', alt: 'Image 13' },
+  { src: 'https://drive.google.com/thumbnail?id=1rC-gq_mwtapMZxO9GcGGq68y_AmqjSKb&sz=w1000', alt: 'Image 14' },
+  { src: 'https://drive.google.com/thumbnail?id=1IZB4HezChXBXcQQ28yBK-fY1ZLmC1D4h&sz=w1000', alt: 'Image 15' },
+  { src: 'https://drive.google.com/thumbnail?id=1GvknWy86mPNQAoqblkgwb-7zmZ9Me8gQ&sz=w1000', alt: 'Image 16' },
+  { src: 'https://drive.google.com/thumbnail?id=12SIvfSTBGnJdmp1lOFzvGdc5jVxF9lWl&sz=w1000', alt: 'Image 17' },
+  { src: 'https://drive.google.com/thumbnail?id=1fVZyjxZRroaUF7L_xHgFBWMztgIzKlls&sz=w1000', alt: 'Image 18' },
+  { src: 'https://drive.google.com/thumbnail?id=1l5H4ShGuaUCl-RqGY4u9fNyhEFix4flP&sz=w1000', alt: 'Image 19' },
+  { src: 'https://drive.google.com/thumbnail?id=15GfZfW-rM49juaeDbrESBk8uFDBN9j_z&sz=w1000', alt: 'Image 20' },
+  { src: 'https://drive.google.com/thumbnail?id=1UJJbrPXbBgeG6XTNCZZBJwZmQQ1NpCCc&sz=w1000', alt: 'Image 21' },
+  { src: 'https://drive.google.com/thumbnail?id=1pVoDSUtJ_psPd3y91QAvP1PNo25qMIJQ&sz=w1000', alt: 'Image 22' },
+  { src: 'https://drive.google.com/thumbnail?id=1ES7UZzNMmoZ86nkfoYCBgWEEGdxcA9jo&sz=w1000', alt: 'Image 23' }
 ]
 
 export default function Gallery() {
@@ -53,7 +68,7 @@ export default function Gallery() {
             onClick={() => openAt(i)}
             aria-label={`Open ${img.alt}`}
           >
-            <img src={`${img.src}&w=800`} alt={img.alt} loading="lazy" />
+            <img src={img.src} alt={img.alt} loading="lazy" />
             <div className="overlay">
               <span className="zoom">View</span>
             </div>
@@ -66,7 +81,7 @@ export default function Gallery() {
           <button className="lb-close" onClick={close} aria-label="Close">✕</button>
           <button className="lb-nav lb-prev" onClick={prev} aria-label="Previous">‹</button>
           <div className="lb-stage">
-            <img src={`${IMAGES[index].src}&w=1600`} alt={IMAGES[index].alt} />
+            <img src={IMAGES[index].src} alt={IMAGES[index].alt} />
             <div className="lb-caption">{IMAGES[index].alt} — {index + 1}/{IMAGES.length}</div>
           </div>
           <button className="lb-nav lb-next" onClick={next} aria-label="Next">›</button>
