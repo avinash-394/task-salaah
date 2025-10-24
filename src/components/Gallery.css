@@ -158,3 +158,18 @@
   .thumb img { height: 120px }
   .overlay .zoom { margin: 8px; font-size: 12px }
 }
+
+/* Laptop / desktop breakpoints: force column counts so the gallery appears in ~3-4 rows
+   - mid-laptop: 6 columns -> with current image count produces ~4 rows
+   - large laptop/desktop: 8 columns -> with current image count produces ~3 rows
+*/
+@media (min-width: 900px) {
+  /* Desktop / laptop: show 3 columns */
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .thumb img {
+    height: 260px;
+  }
+}

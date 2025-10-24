@@ -104,9 +104,7 @@ export default function Gallery() {
             }}
           >
             <img src={img.src} alt={img.alt} loading="lazy" />
-            <div className="overlay">
-              <span className="zoom">View</span>
-            </div>
+            
           </button>
         ))}
       </div>
