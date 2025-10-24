@@ -30,6 +30,8 @@ const IMAGES = [
 export default function Gallery() {
   const [isOpen, setIsOpen] = useState(false)
   const [index, setIndex] = useState(0)
+  const touchStartX = React.useRef(null)
+
 
   const openAt = (i) => {
     setIndex(i)
@@ -58,6 +60,27 @@ export default function Gallery() {
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
+  // touch handlers for mobile swipe support
+  const onTouchStart = (e) => {
+    touchStartX.current = e.touches[0]?.clientX ?? null
+  }
+
+  const onTouchEnd = (e) => {
+    if (touchStartX.current == null) return
+    const endX = e.changedTouches[0]?.clientX ?? null
+    if (endX == null) return
+    const dx = endX - touchStartX.current
+    const threshold = 50
+    if (dx > threshold) {
+      // swipe right -> previous
+      prev()
+    } else if (dx < -threshold) {
+      // swipe left -> next
+      next()
+    }
+    touchStartX.current = null
+  }
+
   return (
     <div className="gallery-root">
       <div className="grid">
@@ -77,10 +100,18 @@ export default function Gallery() {
       </div>
 
       {isOpen && (
-        <div className="lightbox" role="dialog" aria-modal="true">
+        <div
+          className="lightbox"
+          role="dialog"
+          aria-modal="true"
+          onClick={(e) => {
+            // clicking on backdrop closes
+            if (e.target === e.currentTarget) close()
+          }}
+        >
           <button className="lb-close" onClick={close} aria-label="Close">✕</button>
           <button className="lb-nav lb-prev" onClick={prev} aria-label="Previous">‹</button>
-          <div className="lb-stage">
+          <div className="lb-stage" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
             <img src={IMAGES[index].src} alt={IMAGES[index].alt} />
             <div className="lb-caption">{IMAGES[index].alt} — {index + 1}/{IMAGES.length}</div>
           </div>
