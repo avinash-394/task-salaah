@@ -90,6 +90,18 @@ export default function Gallery() {
             className="thumb"
             onClick={() => openAt(i)}
             aria-label={`Open ${img.alt}`}
+            onMouseMove={(e) => {
+              const r = e.currentTarget.getBoundingClientRect()
+              const x = e.clientX - r.left
+              const y = e.clientY - r.top
+              e.currentTarget.style.setProperty('--mx', x + 'px')
+              e.currentTarget.style.setProperty('--my', y + 'px')
+            }}
+            onMouseLeave={(e) => {
+              // reset to center
+              e.currentTarget.style.setProperty('--mx', '50%')
+              e.currentTarget.style.setProperty('--my', '50%')
+            }}
           >
             <img src={img.src} alt={img.alt} loading="lazy" />
             <div className="overlay">
